@@ -1,5 +1,12 @@
 "use strict";
 
+let colorPicker = new iro.ColorPicker("#usersPick", {
+  // Set the size of the color picker
+  width: 320,
+  // Set the initial color to pure red
+  color: "#f00",
+});
+
 // Variabler på farverne
 const color1 = document.querySelector("#color1");
 const color2 = document.querySelector("#color2");
@@ -44,25 +51,21 @@ async function start() {
   tip = document.querySelector("#tip");
   quarter = document.querySelector("#quarter");
   foxing = document.querySelector("#foxing");
+  console.log(colorPicker.color.rgb);
 
-  addColorsToRect();
+  addColorsToDiv();
   init();
 }
 
-function addColorsToRect() {
-  color1.style.fill = "#ff89a2";
-  color2.style.fill = "#C9CEFF";
-  color3.style.fill = "#5A83CC";
-  color4.style.fill = "#525a3d";
-  color5.style.fill = "#AACC5A";
-  color6.style.fill = "#FFEB5C";
-  color7.style.fill = "#DF74FF";
-  color8.style.fill = "#35CC5B";
-}
-
-function setColor(element, selectedColor) {
-  element.style.fill = selectedColor;
-  element.style.stroke = selectedColor;
+function addColorsToDiv() {
+  color1.style.backgroundColor = "#ff89a2";
+  color2.style.backgroundColor = "#C9CEFF";
+  color3.style.backgroundColor = "#5A83CC";
+  color4.style.backgroundColor = "#525a3d";
+  color5.style.backgroundColor = "#AACC5A";
+  color6.style.backgroundColor = "#FFEB5C";
+  color7.style.backgroundColor = "#DF74FF";
+  color8.style.backgroundColor = "#35CC5B";
 }
 
 function init() {
@@ -100,10 +103,19 @@ function init() {
   foxing.addEventListener("click", (event) => {
     setColor(event.target, selectedColor);
   });
+
   document.querySelectorAll(".color").forEach((element) => {
     element.addEventListener("click", (event) => {
-      selectedColor = event.target.style.fill;
-      console.log(selectedColor);
+      if (event.target.className.includes("IroWheel")) {
+        selectedColor = `rgb(${colorPicker.color.rgb.r}, ${colorPicker.color.rgb.g}, ${colorPicker.color.rgb.b})`;
+      } else {
+        selectedColor = event.target.style.backgroundColor;
+      }
     });
   });
+}
+
+function setColor(element, selectedColor) {
+  element.style.fill = selectedColor;
+  element.style.stroke = selectedColor;
 }

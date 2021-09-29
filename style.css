@@ -1,0 +1,17 @@
+.color {
+  width: 75px;
+  height: 75px;
+}
+
+svg g {
+  cursor: pointer;
+  stroke-width: 2px;
+}
+svg g path:hover {
+  stroke: black;
+  stroke-width: 3px;
+}
+
+#shadow_Image {
+  pointer-events: none;
+}
